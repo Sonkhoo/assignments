@@ -10,6 +10,16 @@ let requestCount = 0;
 // maintain a count of the number of requests made to the server in the global
 // requestCount variable
 
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+});
+
+//global middleware
+app.use((req, res, next) => {
+  requestCount++;
+  next();
+})
+
 app.get('/user', function(req, res) {
   res.status(200).json({ name: 'john' });
 });

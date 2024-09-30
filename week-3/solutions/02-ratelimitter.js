@@ -10,6 +10,10 @@ const app = express();
 // You have been given a numberOfRequestsForUser object to start off with which
 // clears every one second
 
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+})
+
 let numberOfRequestsForUser = {};
 setInterval(() => {
     numberOfRequestsForUser = {};
