@@ -6,18 +6,12 @@ const { Admin } = require("../db");
 
 
 const adminMiddleware= async(req, res, next)=>{
-
     const adminUsername = req.headers.username
     const adminPassword = req.headers.password
         const admin = await Admin.findOne({
             username: adminUsername,
             password: adminPassword
         })
-
-
-
-
-        
         console.log(admin);
         if(admin){
             next();

@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const adminRouter = require("./routes/admin.js")
+const userRouter = require("./routes/user.js");
 
+
+
+const PORT = 3000;
 // Connect to MongoDB
 const connectDB = async () => {
     try {
@@ -11,7 +19,24 @@ const connectDB = async () => {
         console.log(error)
     }
 }
+connectDB()
+.then(()=>{
+    console.log("MongoDB connected 1");
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+})
+.catch((err)=>{
+    console.log(err);
+})
 
+
+// Middleware for parsing request bodies
+app.use(bodyParser.json());
+app.use("/admin", adminRouter)
+app.use("/user", userRouter)
+
+a
 // Define schemas
 const AdminSchema = new mongoose.Schema({
     // Schema definition here
@@ -84,7 +109,7 @@ const User = mongoose.model('User', UserSchema);
 const Course = mongoose.model('Course', CourseSchema);
 
 //exporting connectDB
-module.exports.connectDB = connectDB;
+
 module.exports = {
     Admin,
     User,
